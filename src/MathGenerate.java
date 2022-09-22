@@ -2,20 +2,22 @@ import java.util.HashSet;
 import java.util.Random;
 
 /**
- * @ClassName : MathGenerate  //类名
- * @Description : 生成数学题目  //描述
- * @Author : 15154 //作者
+ * @ClassName: MathGenerate    // 类名
+ * @Description: 生成数学题目    // 描述
+ * @Author: 15154              // 作者
  * @Date: 2022/9/21  8:16
  */
 
-
 public class MathGenerate {
+
     // 标志是否出现除以0，根号下负数，tan90的情况，如果有，则重新生成，true表示无，false表示有
     static boolean isIllegal = false;
+
     // 下面数学符号对应的等级
     static int[] opPriority = {
             1, 1, 2, 2, 3, 3, 4, 4, 4, -1
     };
+
     //不同字符数学符号表达
     static String[] operation = {
             "+", "-", "*", "/", "√", "^2", "sin", "cos", "tan", "none"
@@ -27,14 +29,14 @@ public class MathGenerate {
     }
 
     /**
-     * @author :Chang
-     * @date :2022/9/10 20:54
-     * @description :得到数学符号在operation数组中的下标
+     * @author: Chang
+     * @date: 2022/9/10 20:54
+     * @description: 得到数学符号在operation数组中的下标
      */
     public static int getOpIndex(String strOp) {
         int opIndex = 0;
         for (int index = 0; index < operation.length; index++) {
-            if (operation[index].equals(strOp)) {
+            if (operation[index].equals(strOp) ) {
                 opIndex = index;
                 break;
             }
@@ -43,15 +45,15 @@ public class MathGenerate {
     }
 
     /**
-     * @author :Chang
-     * @date :2022/9/10 20:55
-     * @description :生成单独一个数学题目，本质上是构造这个树
+     * @author: Chang
+     * @date: 2022/9/10 20:55
+     * @description: 生成单独一个数学题目，本质上是构造这个树
      */
     static Problem generateMath(int operationNum) {
-        isIllegal = false;
         Problem problem = new Problem();
         Random random = new Random();
         int leftOpNum;
+
         /**
          * 如果被分配的数学操作符为0个，说明该节点是实数节点，取值范围1-100
          * 则该节点为根节点，左子树和右子树都为空
@@ -65,7 +67,9 @@ public class MathGenerate {
             problem.randomValue = random.nextInt(100) + 1;
             return problem;
         }
+
         problem.operator = getOperation();
+
         /**
          * 根据当前节点的数学符号进行后续操作
          * 1、如果当前符号是加减乘除二元符号，则给左节点和右节点将剩余数学符号数随机分配
@@ -95,6 +99,7 @@ public class MathGenerate {
             default:
                 break;
         }
+
         // 用于遍历，找出所有数学符号中最高的符号等级，和用户等级在后续进行匹配
         if (problem.left != null) {
             if (problem.level < problem.left.level) {
@@ -106,7 +111,6 @@ public class MathGenerate {
                 problem.level = problem.right.level;
             }
         }
-
 
         switch (problem.operator) {
             case "+":
@@ -130,7 +134,7 @@ public class MathGenerate {
                 problem.randomValue = problem.left.randomValue / problem.right.randomValue;
                 break;
             case "√":
-                if (problem.right.randomValue < 0) {
+                if (problem.right.randomValue < 0.0) {
                     isIllegal = true;
                 }
                 problem.randomValue = Math.sqrt(problem.right.randomValue);
@@ -157,8 +161,8 @@ public class MathGenerate {
     }
 
     /**
-     * @author :Chang
-     * @date :2022/9/10 21：03
+     * @author: Chang
+     * @date: 2022/9/10 21：03
      * @description :生成表达式字符串
      */
     public static String generateExpression(Problem problem) {
@@ -183,6 +187,7 @@ public class MathGenerate {
                 rightExp = "(" + rightExp + ")";
             }
         }
+
         // 根据当前运算符，将左边和右边连接起来
         switch (problem.operator) {
             case "+":
@@ -222,15 +227,16 @@ public class MathGenerate {
     }
 
     /**
-     * @author :Chang
-     * @date :2022/9/10 21：08
-     * @description :根据用户的等级选择相应的数学公式
+     * @author: Chang
+     * @date: 2022/9/10 21：08
+     * @description: 根据用户的等级选择相应的数学公式
      */
     public static ProblemInformation getFinalExpression(String type) {
         Random random = new Random();
         ProblemInformation problemInformation = new ProblemInformation();
         String mathStr;
         while (true) {
+            isIllegal = false;
             Problem problemTemp = generateMath(random.nextInt(3) + 3);
             if (!isIllegal) {
                 mathStr = generateExpression(problemTemp);
