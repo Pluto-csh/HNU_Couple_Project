@@ -14,15 +14,10 @@
 
 在QQ邮箱的设置页面，将POP3/SMTP服务打开：
 
-<img src="C:\Users\15154\AppData\Roaming\Typora\typora-user-images\image-20220922205246467.png" alt="image-20220922205246467" style="zoom:67%;" />
-
 并获取授权码：
-
-<img src="C:\Users\15154\AppData\Roaming\Typora\typora-user-images\image-20220922205304298.png" alt="image-20220922205304298" style="zoom:67%;" />
 
 然后再*RegisterUI*类中，找到*sendMail*方法：
 
-<img src="C:\Users\15154\AppData\Roaming\Typora\typora-user-images\image-20220922205356443.png" alt="image-20220922205356443" style="zoom:67%;" />
 
 再*sendEmai*l中输入您的邮箱，再*sendEmailPwd*中输入您的授权码，即可正常使用
 
@@ -50,27 +45,4 @@ sqlite>
 
 本项目通过使用*flatlaf*实现对界面的优化，*flatlaf*的下载链接：[](https://search.maven.org/artifact/com.formdev/flatlaf/2.4/jar),点击最右边的*Download*按钮进行下载
 
-## 写在最后
-
-四个*jar*文件下载之后，需要添加到类依赖里面，此处以*IDEA*为例。
-
-选择文件：
-
-<img src="C:\Users\15154\AppData\Roaming\Typora\typora-user-images\image-20220922200003801.png" alt="image-20220922200003801" style="zoom:67%;" />
-
-然后选择项目结构：
-
-<img src="C:\Users\15154\AppData\Roaming\Typora\typora-user-images\image-20220922195927506.png" alt="image-20220922195927506" style="zoom: 67%;" />
-
-然后选择模块：
-
-<img src="C:\Users\15154\AppData\Roaming\Typora\typora-user-images\image-20220922200100325.png" alt="image-20220922200100325" style="zoom:67%;" />
-
-点击*+*号，出现选择类型：
-
-<img src="C:\Users\15154\AppData\Roaming\Typora\typora-user-images\image-20220922200138674.png" alt="image-20220922200138674" style="zoom:67%;" />
-
-最后将文件导入到项目里，点击应用即可
-
-*为了您方便使用，我们选择将4个jar文件上传，您直接找到external-library文件夹即可*
 
